@@ -1,22 +1,30 @@
 package poe.spring.api;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import poe.spring.domain.Greeting;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/hello")
 public class GreetingController {
 
-	@RequestMapping("/hello")
-	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return new Greeting(1, "hello " + name);
-	}
+    @GetMapping
+    public String greeting(@RequestParam(value = "name") String name) {
+        return "hello " + name;
+    }
 
-	@RequestMapping("/hi/name/{name}/lastname/{lastname}")
-	public Greeting hi(@PathVariable(value = "name") String name, @PathVariable(value = "lastname") String lastname) {
-		return new Greeting(1, "hi " + name);
-	}
+    @PostMapping
+    public String greetingPost(@RequestParam(value = "name") String name) {
+        return "hello POST " + name;
+    }
+
+    @PostMapping("/post2")
+    public String greetingPost2(@RequestParam(value = "name") String name) {
+        return "hello POST2 " + name;
+    }
+
+    @DeleteMapping
+    public String greetingDelete() {
+        return "hello Delete ";
+    }
+
+
 }

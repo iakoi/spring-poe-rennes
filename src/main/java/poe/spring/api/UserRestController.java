@@ -1,25 +1,37 @@
 package poe.spring.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import poe.spring.domain.User;
+import poe.spring.repository.UserRepository;
 import poe.spring.service.UserManagerService;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserRestController {
 
-	@Autowired
-	UserManagerService userManagerService;
+    @Autowired
+    private UserManagerService userManagerService;
 
-	@PostMapping
-	public User save(@RequestBody User user) {
-		User savedUser = userManagerService.signup(user.getLogin(), user.getPassword());
-		System.out.println("user id sqsq: " + savedUser);
-		return savedUser;
-	}
+    @Autowired
+    private UserRepository userRepository;
+
+    @PostMapping
+    public User save(@RequestBody User user) {
+        User savedUser = userManagerService.signup(user.getLogin(), user.getPassword());
+        System.out.println("user id : " + savedUser);
+        return savedUser;
+    }
+
+    @GetMapping("/{userId}")
+    public User find(@PathVariable("userId") Long userId, HttpServletResponse response) {
+        User userFromBdd = userRepository.findOne(userId);
+        if (userFromBdd == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+
+        return userFromBdd;
+    }
 }
