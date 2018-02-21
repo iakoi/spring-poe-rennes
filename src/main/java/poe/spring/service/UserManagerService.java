@@ -2,18 +2,20 @@ package poe.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import poe.spring.annotation.PoeChrono;
+import poe.spring.annotation.Chrono;
 import poe.spring.domain.User;
 import poe.spring.repository.UserRepository;
 
 @Service
+@Chrono
 public class UserManagerService {
 
     @Autowired
     private UserRepository userRepository;
 
-    @PoeChrono
+    @Chrono
     public User signup(String login, String password) {
+        System.out.println("plop");
         User user = null;
         // on vérifie que le login n'est pas déjà utilisé
         if (userRepository.findByLogin(login) == null) {
@@ -23,5 +25,10 @@ public class UserManagerService {
             userRepository.save(user);
         }
         return user;
+    }
+
+
+    public void foo() {
+        System.out.println("bar");
     }
 }
