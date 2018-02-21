@@ -2,6 +2,7 @@ package poe.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import poe.spring.annotation.PoeChrono;
 import poe.spring.domain.User;
 import poe.spring.repository.UserRepository;
 
@@ -11,6 +12,7 @@ public class UserManagerService {
     @Autowired
     private UserRepository userRepository;
 
+    @PoeChrono
     public User signup(String login, String password) {
         User user = null;
         // on vérifie que le login n'est pas déjà utilisé
