@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<h1>Création d'un nouveau compte
+</h1>
+
+<form th:action="@{/signup}" method="post">
+    <input type="text" name="userName"/>
+    <input type="submit" value="Save"/>
+</form>
+</body>
+</html>
