@@ -1,4 +1,4 @@
-package poe.spring.aspect;
+package poe.spring.annotation;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
