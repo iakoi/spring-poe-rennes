@@ -2,8 +2,11 @@ package poe.spring.delegate;
 
 public class PhoneNumberFormaterDelegateService {
 
+    private PhoneNumberFormaterDelegateService() {
+
+    }
+
     /**
-     *
      * @param number un numéro qui ne respecte pas de format précis
      * @return String numéro au format 0600000000
      */
