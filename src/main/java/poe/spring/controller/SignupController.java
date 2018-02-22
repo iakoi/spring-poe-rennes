@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import poe.spring.exception.DuplicateLoginBusinessException;
 import poe.spring.form.LoginForm;
 import poe.spring.service.UserManagerService;
 
@@ -29,7 +30,8 @@ public class SignupController {
     @PostMapping
     public String save(@Valid LoginForm form,
                        BindingResult bindingResult,
-                       RedirectAttributes attr) {
+                       RedirectAttributes attr,
+                       Model model) {
 
         System.out.println("login " + form.getLogin());
         System.out.println("password " + form.getPassword());
@@ -38,7 +40,12 @@ public class SignupController {
             return "signup";
         }
 
-        userManagerService.signup(form.getLogin(), form.getPassword());
+        try {
+            userManagerService.signup(form.getLogin(), form.getPassword());
+        } catch (DuplicateLoginBusinessException e) {
+            model.addAttribute("error", "Ce login est déjà utilisé!");
+            return "signup";
+        }
         attr.addAttribute("userName", form.getLogin());
         return "redirect:/signup/success";
     }

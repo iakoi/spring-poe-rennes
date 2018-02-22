@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import poe.spring.domain.User;
+import poe.spring.exception.DuplicateLoginBusinessException;
 import poe.spring.repository.UserRepository;
 
 import java.util.UUID;
@@ -25,7 +26,7 @@ public class UserManagerServiceTests {
     UserRepository userRepository;
 
     @Test
-    public void checkUserCreation() {
+    public void checkUserCreation() throws DuplicateLoginBusinessException {
 
         // enregistre un nouvel utilisateur en BDD
         String login = "jean";
@@ -44,7 +45,7 @@ public class UserManagerServiceTests {
     }
 
     @Test
-    public void checkDuplicateUserCreation() {
+    public void checkDuplicateUserCreation() throws DuplicateLoginBusinessException {
 
         // enregistre un nouvel utilisateur en BDD
         String login = UUID.randomUUID().toString();

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import poe.spring.annotation.Chrono;
 import poe.spring.domain.User;
+import poe.spring.exception.DuplicateLoginBusinessException;
 import poe.spring.repository.UserRepository;
 
 @Service
@@ -14,8 +15,7 @@ public class UserManagerService {
     private UserRepository userRepository;
 
     @Chrono
-    public User signup(String login, String password) {
-        System.out.println("plop");
+    public User signup(String login, String password) throws DuplicateLoginBusinessException {
         User user = null;
         // on vérifie que le login n'est pas déjà utilisé
         if (userRepository.findByLogin(login) == null) {
@@ -23,6 +23,8 @@ public class UserManagerService {
             user.setLogin(login);
             user.setPassword(password);
             userRepository.save(user);
+        } else {
+            throw new DuplicateLoginBusinessException();
         }
         return user;
     }

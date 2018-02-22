@@ -4,7 +4,7 @@ import javax.validation.constraints.Size;
 
 public class LoginForm {
 
-    @Size(min = 2)
+    @Size(min = 2, max = 50)
     private String login;
 
     @Size(min = 1)

@@ -3,6 +3,7 @@ package poe.spring.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import poe.spring.domain.User;
+import poe.spring.exception.DuplicateLoginBusinessException;
 import poe.spring.repository.UserRepository;
 import poe.spring.service.UserManagerService;
 
@@ -19,8 +20,13 @@ public class UserRestController {
     private UserRepository userRepository;
 
     @PostMapping
-    public User save(@RequestBody User user) {
-        User savedUser = userManagerService.signup(user.getLogin(), user.getPassword());
+    public User save(@RequestBody User user, HttpServletResponse response) {
+        User savedUser = null;
+        try {
+            savedUser = userManagerService.signup(user.getLogin(), user.getPassword());
+        } catch (DuplicateLoginBusinessException e) {
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+        }
         System.out.println("user id : " + savedUser);
         return savedUser;
     }
