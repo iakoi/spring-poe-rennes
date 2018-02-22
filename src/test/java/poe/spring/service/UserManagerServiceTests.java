@@ -66,9 +66,8 @@ public class UserManagerServiceTests {
         User duplicateUser = userManagerService.signup(login, "secret");
         assertThat(duplicateUser).isNull();
 
-        /// on vérifie qu'on peut toujours créer d'autres users
+        // on vérifie qu'on peut toujours créer d'autres users
         assertThat(userManagerService.signup(login + "notTheSame", "secret")).isNotNull();
-
 
     }
 }

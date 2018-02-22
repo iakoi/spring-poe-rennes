@@ -1,44 +1,55 @@
 package poe.spring.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
 
-	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-	
-	private String login;
-	
-	private String password;
 
-	public Long getId() {
-		return id;
-	}
+    private String login;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private String password;
 
-	public String getLogin() {
-		return login;
-	}
+    @OneToMany(mappedBy = "conducteur")
+    private List<Trajet> trajets = new ArrayList<>();
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+    public List<Trajet> getTrajets() {
+        return trajets;
+    }
+
+    public void setTrajets(List<Trajet> trajets) {
+        this.trajets = trajets;
+    }
 }
