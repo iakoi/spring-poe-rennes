@@ -1,20 +1,23 @@
 package poe.spring.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Trajet {
 
-	public String villeDepart;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	public String villeDepart;
 	private String villeArrivee;
 	private Date dateDepart; // précision à la minute
 	private Integer prix;
 	private Integer nbPlaces;
 
+	@JsonIgnore
 	@ManyToOne
 	private User conducteur;
 
@@ -27,7 +30,7 @@ public class Trajet {
 	}
 
 	public String getVilleDepart() {
-		return villeDepart + " toto";
+		return villeDepart;
 	}
 
 	public void setVilleDepart(String villeDepart) {
