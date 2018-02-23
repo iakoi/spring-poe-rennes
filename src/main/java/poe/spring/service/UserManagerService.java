@@ -11,26 +11,25 @@ import poe.spring.repository.UserRepository;
 @Chrono
 public class UserManagerService {
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Chrono
-    public User signup(String login, String password) throws DuplicateLoginBusinessException {
-        User user = null;
-        // on vérifie que le login n'est pas déjà utilisé
-        if (userRepository.findByLogin(login) == null) {
-            user = new User();
-            user.setLogin(login);
-            user.setPassword(password);
-            userRepository.save(user);
-        } else {
-            throw new DuplicateLoginBusinessException();
-        }
-        return user;
-    }
+	public User signup(String login, String password) throws DuplicateLoginBusinessException {
+		User user = null;
+		// on vérifie que le login n'est pas déjà utilisé
+		if (userRepository.findByLogin(login) == null) {
+			user = new User();
+			user.setLogin(login);
+			user.setPassword(password);
+			userRepository.save(user);
+		} else {
+			throw new DuplicateLoginBusinessException();
+		}
+		return user;
+	}
 
 
-    public void foo() {
-        System.out.println("bar");
-    }
+	public void foo() {
+		System.out.println("bar");
+	}
 }

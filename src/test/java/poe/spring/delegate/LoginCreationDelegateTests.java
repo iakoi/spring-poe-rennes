@@ -11,29 +11,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class LoginCreationDelegateTests {
 
-    @Test
-    public void checkLoginOK() {
-        String login = buildStringWithSizeBetween(LoginCreationDelegate.MIN_LOGIN_LENGTH);
-        assertThat(LoginCreationDelegate.isSizeValid(login)).isTrue();
+	@Test
+	public void checkLoginOK() {
+		String login = buildStringWithSizeBetween(LoginCreationDelegate.MIN_LOGIN_LENGTH);
+		assertThat(LoginCreationDelegate.isSizeValid(login)).isTrue();
 
-        login = buildStringWithSizeBetween(LoginCreationDelegate.MAX_LOGIN_LENGTH);
-        assertThat(LoginCreationDelegate.isSizeValid(login)).isTrue();
-    }
+		login = buildStringWithSizeBetween(LoginCreationDelegate.MAX_LOGIN_LENGTH);
+		assertThat(LoginCreationDelegate.isSizeValid(login)).isTrue();
+	}
 
-    @Test
-    public void checkLoginSizeKO() {
-        String login = buildStringWithSizeBetween(LoginCreationDelegate.MIN_LOGIN_LENGTH - 1);
-        assertThat(LoginCreationDelegate.isSizeValid(login)).isFalse();
+	@Test
+	public void checkLoginSizeKO() {
+		String login = buildStringWithSizeBetween(LoginCreationDelegate.MIN_LOGIN_LENGTH - 1);
+		assertThat(LoginCreationDelegate.isSizeValid(login)).isFalse();
 
-        login = buildStringWithSizeBetween(LoginCreationDelegate.MAX_LOGIN_LENGTH + 1);
-        assertThat(LoginCreationDelegate.isSizeValid(login)).isFalse();
-    }
+		login = buildStringWithSizeBetween(LoginCreationDelegate.MAX_LOGIN_LENGTH + 1);
+		assertThat(LoginCreationDelegate.isSizeValid(login)).isFalse();
+	}
 
-    private String buildStringWithSizeBetween(int size) {
-        String str = "";
-        for (int i = 0; i < size; i++) {
-            str += "0";
-        }
-        return str;
-    }
+	private String buildStringWithSizeBetween(int size) {
+		String str = "";
+		for (int i = 0; i < size; i++) {
+			str += "0";
+		}
+		return str;
+	}
 }

@@ -14,14 +14,14 @@ import java.util.List;
 @RequestMapping("/trajet")
 public class TrajetController {
 
-    @Autowired
-    TrajetRepository trajetRepository;
+	@Autowired
+	TrajetRepository trajetRepository;
 
-    @GetMapping
-    public String list(Model model) {
-        List<Trajet> trajets = (List<Trajet>) trajetRepository.findAll();
-        model.addAttribute("trajets", trajets);
-        return "/trajet/list";
-    }
+	@GetMapping
+	public String list(Model model) {
+		List<Trajet> trajets = (List<Trajet>) trajetRepository.findAll();
+		model.addAttribute("trajets", trajets);
+		return "/trajet/list";
+	}
 
 }

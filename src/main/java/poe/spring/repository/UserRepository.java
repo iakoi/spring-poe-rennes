@@ -9,8 +9,8 @@ import poe.spring.domain.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    User findByLogin(String login);
+	User findByLogin(String login);
 
-    @Query("select u from User u where u.login = :log")
-    void rechercherParLogin(@Param("log") String login);
+	@Query("select u from User u where u.login = :log")
+	void rechercherParLogin(@Param("log") String login);
 }

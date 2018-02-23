@@ -1,33 +1,23 @@
-package poe.spring.domain;
+package poe.spring.api.dto;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
-@Entity
-public class Trajet {
+public class TrajetDto {
 
-	public String villeDepart;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String villeDepart;
 	private String villeArrivee;
+
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date dateDepart; // précision à la minute
+
 	private Integer prix;
 	private Integer nbPlaces;
-
-	@ManyToOne
-	private User conducteur;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	private Long conducteurId;
 
 	public String getVilleDepart() {
-		return villeDepart + " toto";
+		return villeDepart;
 	}
 
 	public void setVilleDepart(String villeDepart) {
@@ -66,11 +56,11 @@ public class Trajet {
 		this.nbPlaces = nbPlaces;
 	}
 
-	public User getConducteur() {
-		return conducteur;
+	public Long getConducteurId() {
+		return conducteurId;
 	}
 
-	public void setConducteur(User conducteur) {
-		this.conducteur = conducteur;
+	public void setConducteurId(Long conducteurId) {
+		this.conducteurId = conducteurId;
 	}
 }

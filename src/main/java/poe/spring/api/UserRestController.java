@@ -13,31 +13,31 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/api/user")
 public class UserRestController {
 
-    @Autowired
-    private UserManagerService userManagerService;
+	@Autowired
+	private UserManagerService userManagerService;
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @PostMapping
-    public User save(@RequestBody User user, HttpServletResponse response) {
-        User savedUser = null;
-        try {
-            savedUser = userManagerService.signup(user.getLogin(), user.getPassword());
-        } catch (DuplicateLoginBusinessException e) {
-            response.setStatus(HttpServletResponse.SC_CONFLICT);
-        }
-        System.out.println("user id : " + savedUser);
-        return savedUser;
-    }
+	@PostMapping
+	public User save(@RequestBody User user, HttpServletResponse response) {
+		User savedUser = null;
+		try {
+			savedUser = userManagerService.signup(user.getLogin(), user.getPassword());
+		} catch (DuplicateLoginBusinessException e) {
+			response.setStatus(HttpServletResponse.SC_CONFLICT);
+		}
+		System.out.println("user id : " + savedUser);
+		return savedUser;
+	}
 
-    @GetMapping("/{userId}")
-    public User find(@PathVariable("userId") Long userId, HttpServletResponse response) {
-        User userFromBdd = userRepository.findOne(userId);
-        if (userFromBdd == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
+	@GetMapping("/{userId}")
+	public User find(@PathVariable("userId") Long userId, HttpServletResponse response) {
+		User userFromBdd = userRepository.findOne(userId);
+		if (userFromBdd == null) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 
-        return userFromBdd;
-    }
+		return userFromBdd;
+	}
 }

@@ -6,25 +6,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/hello")
 public class GreetingController {
 
-    @GetMapping
-    public String greeting(@RequestParam(value = "name") String name) {
-        return "hello " + name;
-    }
+	@GetMapping
+	public String greeting(@RequestParam(value = "name") String name) {
+		return "hello " + name;
+	}
 
-    @PostMapping
-    public String greetingPost(@RequestParam(value = "name") String name) {
-        return "hello POST " + name;
-    }
+	@PostMapping
+	public String greetingPost(@RequestParam(value = "name") String name) {
+		return "hello POST " + name;
+	}
 
-    @PostMapping("/post2")
-    public String greetingPost2(@RequestParam(value = "name") String name) {
-        return "hello POST2 " + name;
-    }
+	@PostMapping("/post2")
+	public String greetingPost2(@RequestParam(value = "name") String name) {
+		return "hello POST2 " + name;
+	}
 
-    @DeleteMapping
-    public String greetingDelete() {
-        return "hello Delete ";
-    }
+	@DeleteMapping
+	public String greetingDelete() {
+		return "hello Delete ";
+	}
 
 
 }

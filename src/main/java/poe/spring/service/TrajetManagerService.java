@@ -12,38 +12,38 @@ import java.util.Date;
 @Service
 public class TrajetManagerService {
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Autowired
-    private TrajetRepository trajetRepository;
+	@Autowired
+	private TrajetRepository trajetRepository;
 
 
-    public Trajet proposerUnTrajet(Long userId, String villeDepart,
-                                   String villeArrivee, Date dateDepart,
-                                   Integer prix, Integer nombreDePlace) throws Exception {
+	public Trajet proposerUnTrajet(Long userId, String villeDepart,
+								   String villeArrivee, Date dateDepart,
+								   Integer prix, Integer nombreDePlace) throws Exception {
 
-        Trajet trajet;
-        User conducteur = userRepository.findOne(userId);
-        if (conducteur != null) {
-            trajet = new Trajet();
-            trajet.setVilleDepart(villeDepart);
-            trajet.setVilleArrivee(villeArrivee);
-            trajet.setDateDepart(dateDepart);
-            trajet.setPrix(prix);
-            trajet.setNbPlaces(nombreDePlace);
+		Trajet trajet;
+		User conducteur = userRepository.findOne(userId);
+		if (conducteur != null) {
+			trajet = new Trajet();
+			trajet.setVilleDepart(villeDepart);
+			trajet.setVilleArrivee(villeArrivee);
+			trajet.setDateDepart(dateDepart);
+			trajet.setPrix(prix);
+			trajet.setNbPlaces(nombreDePlace);
 
-            trajet.setConducteur(conducteur);
-            conducteur.getTrajets().add(trajet);
+			trajet.setConducteur(conducteur);
+			conducteur.getTrajets().add(trajet);
 
-            trajet = trajetRepository.save(trajet);
-            userRepository.save(conducteur);
+			trajet = trajetRepository.save(trajet);
+			userRepository.save(conducteur);
 
-        } else {
-            throw new Exception("conducteur introuvable");
-        }
+		} else {
+			throw new Exception("conducteur introuvable");
+		}
 
-        return trajet;
-    }
+		return trajet;
+	}
 
 }
