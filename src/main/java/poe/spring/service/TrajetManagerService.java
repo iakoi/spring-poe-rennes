@@ -7,7 +7,9 @@ import poe.spring.domain.User;
 import poe.spring.repository.TrajetRepository;
 import poe.spring.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class TrajetManagerService {
@@ -44,6 +46,26 @@ public class TrajetManagerService {
 		}
 
 		return trajet;
+	}
+
+
+	public List<Trajet> search(Long userId, String town) {
+		List<Trajet> trajets = new ArrayList<>();
+
+		if (userId == null && town == null) {
+			trajets = (List<Trajet>) trajetRepository.findAll();
+		} else {
+			if (userId != null) {
+				User userToSearch = userRepository.findOne(userId);
+				trajets = trajetRepository.findByConducteur(userToSearch);
+			}
+
+			if (town != null) {
+				trajetRepository.findByVilleDepartLike("%" + town + "%").retainAll(trajets);
+			}
+		}
+
+		return trajets;
 	}
 
 }

@@ -5,6 +5,11 @@
 <h1>Ensemble des trajets créés
 </h1>
 
+<form th:action="@{/trajet}" method="get">
+    <input type="text" th:name="userId" th:value="*{userId}" placeholder="taper votre user"/>
+    <input type="submit" value="Rechercher"/>
+</form>
+
 <div th:each="trajet : ${trajets}">
     <div th:text="${trajet.id}"/>
     <div th:text="${trajet.villeDepart}"/>
