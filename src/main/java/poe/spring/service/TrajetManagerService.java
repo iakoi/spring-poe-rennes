@@ -53,7 +53,9 @@ public class TrajetManagerService {
 		List<Trajet> trajets = new ArrayList<>();
 
 		if (town != null) {
-			trajetRepository.findByVilleDepartLike("%" + town + "%").retainAll(trajets);
+			trajets = trajetRepository.findByVilleDepartLikeIgnoreCaseOrVilleArriveeLikeIgnoreCase("%" + town + "%", "%" + town + "%");
+		} else {
+			trajets = (List<Trajet>) trajetRepository.findAll();
 		}
 
 		return trajets;

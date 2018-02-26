@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import poe.spring.domain.Trajet;
-import poe.spring.repository.TrajetRepository;
 import poe.spring.service.TrajetManagerService;
 
 import java.util.List;
@@ -20,9 +19,9 @@ public class TrajetController {
 	TrajetManagerService trajetManagerService;
 
 	@GetMapping
-	public String list(@RequestParam(required = false) Long userId, @RequestParam(required = false) String town,  Model model) {
+	public String list(@RequestParam(required = false) Long userId, @RequestParam(required = false) String town, Model model) {
 
-		List<Trajet> trajets = trajetManagerService.search(userId, town);
+		List<Trajet> trajets = trajetManagerService.search(town);
 
 		model.addAttribute("trajets", trajets);
 
