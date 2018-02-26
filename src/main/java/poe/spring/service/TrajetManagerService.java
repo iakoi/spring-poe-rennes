@@ -49,20 +49,11 @@ public class TrajetManagerService {
 	}
 
 
-	public List<Trajet> search(Long userId, String town) {
+	public List<Trajet> search(String town) {
 		List<Trajet> trajets = new ArrayList<>();
 
-		if (userId == null && town == null) {
-			trajets = (List<Trajet>) trajetRepository.findAll();
-		} else {
-			if (userId != null) {
-				User userToSearch = userRepository.findOne(userId);
-				trajets = trajetRepository.findByConducteur(userToSearch);
-			}
-
-			if (town != null) {
-				trajetRepository.findByVilleDepartLike("%" + town + "%").retainAll(trajets);
-			}
+		if (town != null) {
+			trajetRepository.findByVilleDepartLike("%" + town + "%").retainAll(trajets);
 		}
 
 		return trajets;

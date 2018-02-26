@@ -4,7 +4,7 @@ public class LoginCreationDelegate {
 
 	public static final int MIN_LOGIN_LENGTH = 4;
 	public static final int MAX_LOGIN_LENGTH = 10;
-	public static final String[] FORBIDDEN_LOGIN = {"toto", "tata", "titi"};
+	public static final String[] FORBIDDEN_LOGIN = {"rechercherParVilleDepart", "tata", "titi"};
 
 
 	public static boolean isSizeValid(String login) {

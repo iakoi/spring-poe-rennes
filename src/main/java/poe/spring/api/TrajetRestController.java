@@ -47,6 +47,6 @@ public class TrajetRestController {
 
 	@GetMapping("/search/{town}")
 	public List<Trajet> search(@PathVariable("town") String ville) {
-		return trajetRepository.toto('%' + ville + '%');
+		return trajetRepository.rechercherParVilleDepart('%' + ville + '%');
 	}
 }

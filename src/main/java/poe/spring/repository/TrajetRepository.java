@@ -13,10 +13,12 @@ import java.util.List;
 public interface TrajetRepository extends CrudRepository<Trajet, Long> {
 
 
-	List<Trajet> findByVilleDepartLike(String search);
+	List<Trajet> findByVilleDepartLikeIgnoreCaseOrVilleArriveeLikeIgnoreCase(String villeDepart, String villeArrivee);
 
 	@Query("select t from Trajet t where villeDepart like :search")
-	List<Trajet> toto(@Param("search") String search);
+	List<Trajet> rechercherParVilleDepart(@Param("search") String search);
+
+
 
 	List<Trajet> findByConducteur(User user);
 
